@@ -1,0 +1,53 @@
+
+-- candidatos crud
+
+DELIMITER //
+CREATE PROCEDURE procInsertCandidato(
+    IN v_nombre VARCHAR(100),
+    IN v_apellido VARCHAR(100),
+    IN v_partido VARCHAR(100),
+    IN v_fecha_nacimiento VARCHAR(100),
+    IN v_propuesta TEXT
+)
+BEGIN
+    INSERT INTO tbl_candidatos (can_nombre, can_apellido, can_partido, can_fecha_nacimiento, can_propuesta) 
+    VALUES (v_nombre, v_apellido, v_partido, v_fecha_nacimiento, v_propuesta);
+END//
+DELIMITER ;
+
+-- actualizar candidato
+DELIMITER //
+CREATE PROCEDURE procUpdateCandidato(
+    IN v_id INT,
+    IN v_nombre VARCHAR(100),
+    IN v_apellido VARCHAR(100),
+    IN v_partido VARCHAR(100),
+    IN v_fecha_nacimiento VARCHAR(100),
+    IN v_propuesta TEXT
+)
+BEGIN
+    UPDATE tbl_candidatos
+    SET can_nombre = v_nombre,
+        can_apellido = v_apellido,
+        can_partido = v_partido,
+        can_fecha_nacimiento = v_fecha_nacimiento,
+        can_propuesta = v_propuesta
+    WHERE can_id = v_id;
+END//
+DELIMITER ;
+
+-- mostrar candidatos
+DELIMITER //
+CREATE PROCEDURE procSelectCandidatos()
+BEGIN
+    SELECT can_id, can_nombre, can_apellido, can_partido, can_fecha_nacimiento, can_propuesta, can_fecha_registro 
+    FROM tbl_candidatos; 
+END//
+DELIMITER ;
+
+-- eliminar candidatos
+DELIMITER //
+CREATE PROCEDURE procDeleteCandidato(IN v_id INT)
+BEGIN
+    DELETE FROM tbl_candidatos WHERE can_id = v_id;
+END//

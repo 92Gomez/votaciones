@@ -1,0 +1,54 @@
+
+-- crud estado de vida
+-- Insertar estado de vida
+DELIMITER //
+CREATE PROCEDURE procInsertEstadoVida(
+    IN v_nombre VARCHAR(100),
+    IN v_apellido VARCHAR(100),
+    IN v_cedula VARCHAR(100),
+    IN v_estado VARCHAR(100),
+    IN v_fecha_defuncion VARCHAR(100)
+)
+BEGIN
+    INSERT INTO tbl_estado_vida (es_nombre, es_apellido, es_cedula, es_estado, es_fecha_defuncion)
+    VALUES (v_nombre, v_apellido, v_cedula, v_estado, v_fecha_defuncion);
+END//
+DELIMITER ;
+
+-- Actualizar estado de vida
+DELIMITER //
+CREATE PROCEDURE procUpdateEstadoVida(
+    IN v_id INT,
+    IN v_nombre VARCHAR(100),
+    IN v_apellido VARCHAR(100),
+    IN v_cedula VARCHAR(100),
+    IN v_estado VARCHAR(100),
+    IN v_fecha_defuncion VARCHAR(100)
+)
+BEGIN
+    UPDATE tbl_estado_vida
+    SET es_nombre = v_nombre,
+        es_apellido = v_apellido,
+        es_cedula = v_cedula,
+        es_estado = v_estado,
+        es_fecha_defuncion = v_fecha_defuncion
+    WHERE es_id = v_id;
+END//
+DELIMITER ;
+
+-- Mostrar todos los estados de vida
+DELIMITER //
+CREATE PROCEDURE procSelectEstadoVida()
+BEGIN
+    SELECT es_id, es_nombre, es_apellido, es_cedula, es_estado, es_fecha_defuncion
+    FROM tbl_estado_vida; 
+END//
+DELIMITER ;
+
+-- Eliminar estado de vida
+DELIMITER //
+CREATE PROCEDURE procDeleteEstadoVida(IN v_id INT)
+BEGIN
+    DELETE FROM tbl_estado_vida WHERE es_id = v_id;
+END//
+DELIMITER ;

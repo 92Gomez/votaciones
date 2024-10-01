@@ -1,0 +1,45 @@
+
+-- insertar usuarios
+DELIMITER //
+CREATE PROCEDURE procInsertUsuarios(
+    IN v_correo VARCHAR(100),
+    IN v_contrasena VARCHAR(100)
+)
+BEGIN
+    INSERT INTO tbl_usuarios (usu_correo, usu_contrasena) 
+    VALUES (v_correo, v_contrasena);
+END//
+DELIMITER ;
+
+-- actualizar usuarios
+DELIMITER //
+CREATE PROCEDURE procUpdateUsuarios(
+    IN v_id INT,
+    IN v_correo VARCHAR(100),
+    IN v_contrasena VARCHAR(100)
+)
+BEGIN
+    UPDATE tbl_usuarios
+    SET usu_correo = v_correo,
+        usu_contrasena = v_contrasena,
+        usu_fechaInicioSecion = CURRENT_TIMESTAMP
+    WHERE usu_id = v_id;
+END//
+DELIMITER ;
+
+-- mostrar usuarios
+DELIMITER //
+CREATE PROCEDURE procSelectUsuarios()
+BEGIN
+    SELECT usu_id, usu_correo, usu_contrasena, usu_fechaInicioSecion 
+    FROM tbl_usuarios; 
+END//
+DELIMITER ;
+
+-- eliminar usuarios
+DELIMITER //
+CREATE PROCEDURE procDeleteUsuarios(IN v_id INT)
+BEGIN
+    DELETE FROM tbl_usuarios WHERE usu_id = v_id;
+END//
+DELIMITER ;

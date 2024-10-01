@@ -1,0 +1,50 @@
+-- CRUD tbl_votos
+-- insertar datos
+DELIMITER //
+CREATE PROCEDURE procInsertVotos(
+    IN v_nombre VARCHAR(100),
+    IN v_apellido VARCHAR(100),
+    IN v_cedula VARCHAR(100),
+    IN v_opcion VARCHAR(100)
+)
+BEGIN
+    INSERT INTO tbl_votos (vo_nombre, vo_apellido, vo_cedula, vo_opcion) 
+    VALUES (v_nombre, v_apellido, v_cedula, v_opcion);
+END//
+DELIMITER ;
+
+-- actualizar datos
+DELIMITER //
+CREATE PROCEDURE procUpdateVotos(
+    IN v_id INT,
+    IN v_nombre VARCHAR(100),
+    IN v_apellido VARCHAR(100),
+    IN v_cedula VARCHAR(100),
+    IN v_opcion VARCHAR(100)
+)
+BEGIN
+    UPDATE tbl_votos
+    SET vo_nombre = v_nombre,
+        vo_apellido = v_apellido,
+        vo_cedula = v_cedula,
+        vo_opcion = v_opcion
+    WHERE vo_id = v_id;
+END//
+DELIMITER ;
+
+-- Mostrar votos
+DELIMITER //
+CREATE PROCEDURE procSelectVotos()
+BEGIN
+    SELECT vo_id, vo_nombre, vo_apellido, vo_cedula, vo_opcion, vo_fecha_envio 
+    FROM tbl_votos; 
+END//
+DELIMITER ;
+
+-- eliminar votos
+DELIMITER //
+CREATE PROCEDURE procDeleteVotos(IN v_id INT)
+BEGIN
+    DELETE FROM tbl_votos WHERE vo_id = v_id;
+END//
+DELIMITER ;

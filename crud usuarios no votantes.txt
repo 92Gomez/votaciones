@@ -1,0 +1,51 @@
+
+-- crud tbl_usuarios_no_votantes
+-- Insertar usuario no votante
+DELIMITER //
+CREATE PROCEDURE procInsertUsuariosNoVotantes(
+    IN v_nombre VARCHAR(100),
+    IN v_apellido VARCHAR(100),
+    IN v_cedula VARCHAR(100),
+    IN v_opcion VARCHAR(100)
+)
+BEGIN
+    INSERT INTO tbl_usuarios_no_votantes (no_nombre, no_apellido, no_cedula, no_opcion) 
+    VALUES (v_nombre, v_apellido, v_cedula, v_opcion);
+END//
+DELIMITER ;
+
+-- Actualizar usuario no votante
+DELIMITER //
+CREATE PROCEDURE procUpdateUsuariosNoVotantes(
+    IN v_id INT,
+    IN v_nombre VARCHAR(100),
+    IN v_apellido VARCHAR(100),
+    IN v_cedula VARCHAR(100),
+    IN v_opcion VARCHAR(100)
+)
+BEGIN
+    UPDATE tbl_usuarios_no_votantes
+    SET no_nombre = v_nombre,
+        no_apellido = v_apellido,
+        no_cedula = v_cedula,
+        no_opcion = v_opcion
+    WHERE no_id = v_id;
+END//
+DELIMITER ;
+
+-- Mostrar usuarios no votantes
+DELIMITER //
+CREATE PROCEDURE procSelectUsuariosNoVotantes()
+BEGIN
+    SELECT no_id, no_nombre, no_apellido, no_cedula, no_opcion, no_fecha_registro 
+    FROM tbl_usuarios_no_votantes; 
+END//
+DELIMITER ;
+
+-- Eliminar usuario no votante
+DELIMITER //
+CREATE PROCEDURE procDeleteUsuariosNoVotantes(IN v_id INT)
+BEGIN
+    DELETE FROM tbl_usuarios_no_votantes WHERE no_id = v_id;
+END//
+DELIMITER ;

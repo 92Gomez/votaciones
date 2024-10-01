@@ -1,0 +1,51 @@
+
+-- partidos crud
+-- Insertar partido
+
+DELIMITER //
+CREATE PROCEDURE procInsertPartido(
+    IN v_nombre_partido VARCHAR(100),
+    IN v_descripcion TEXT
+)
+BEGIN
+    INSERT INTO tbl_partidos (par_nombre_partido, par_descripcion) 
+    VALUES (v_nombre_partido, v_descripcion);
+END//
+DELIMITER ;
+
+
+-- Actualizar partido
+DELIMITER //
+CREATE PROCEDURE procUpdatePartido(
+    IN v_id INT,
+    IN v_nombre_partido VARCHAR(100),
+    IN v_descripcion TEXT
+)
+BEGIN
+    UPDATE tbl_partidos
+    SET par_nombre_partido = v_nombre_partido,
+        par_descripcion = v_descripcion
+    WHERE par_id = v_id;
+END//
+DELIMITER ;
+
+
+-- Mostrar partidos
+
+DELIMITER //
+CREATE PROCEDURE procSelectPartidos()
+BEGIN
+    SELECT par_id, par_nombre_partido, par_fecha_registro, par_descripcion 
+    FROM tbl_partidos; 
+END//
+DELIMITER ;
+
+
+-- Eliminar partido
+
+DELIMITER //
+CREATE PROCEDURE procDeletePartido(IN v_id INT)
+BEGIN
+    DELETE FROM tbl_partidos WHERE par_id = v_id;
+END//
+DELIMITER ;

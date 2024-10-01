@@ -1,0 +1,45 @@
+
+-- Insertar usuario AFK
+DELIMITER //
+CREATE PROCEDURE procInsertUsuariosAFK(
+    IN v_correo VARCHAR(100),
+    IN v_contrasena VARCHAR(100)
+)
+BEGIN
+    INSERT INTO tbl_usuarios_afk (af_correo, af_contrasena) 
+    VALUES (v_correo, v_contrasena);
+END//
+DELIMITER ;
+
+-- Actualizar usuario AFK
+DELIMITER //
+CREATE PROCEDURE procUpdateUsuariosAFK(
+    IN v_id INT,
+    IN v_correo VARCHAR(100),
+    IN v_contrasena VARCHAR(100)
+)
+BEGIN
+    UPDATE tbl_usuarios_afk
+    SET af_correo = v_correo,
+        af_contrasena = v_contrasena,
+        af_fechaCierre = CURRENT_TIMESTAMP
+    WHERE af_id = v_id;
+END//
+DELIMITER ;
+
+-- Mostrar usuarios AFK
+DELIMITER //
+CREATE PROCEDURE procSelectUsuariosAFK()
+BEGIN
+    SELECT af_id, af_correo, af_contrasena, af_fechaCierre 
+    FROM tbl_usuarios_afk; 
+END//
+DELIMITER ;
+
+-- Eliminar usuario AFK
+DELIMITER //
+CREATE PROCEDURE procDeleteUsuariosAFK(IN v_id INT)
+BEGIN
+    DELETE FROM tbl_usuarios_afk WHERE af_id = v_id;
+END//
+DELIMITER ;

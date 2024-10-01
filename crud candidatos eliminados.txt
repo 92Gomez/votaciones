@@ -1,0 +1,54 @@
+
+-- candidatos eliminados
+-- Insertar candidato eliminado
+DELIMITER //
+CREATE PROCEDURE procInsertCandidatoEliminado(
+    IN v_nombre VARCHAR(100),
+    IN v_apellido VARCHAR(100),
+    IN v_partido VARCHAR(100),
+	IN V_fecha_nacimiento VARCHAR(100),
+    IN v_propuesta TEXT
+)
+BEGIN
+    INSERT INTO tbl_candidatos_eliminados (eli_nombre, eli_apellido, eli_partido, eli_fecha_nacimiento, eli_propuesta)
+    VALUES (v_nombre, v_apellido, v_partido, v_fecha_nacimiento, v_propuesta);
+END//
+DELIMITER ;
+
+-- Actualizar candidato eliminado
+DELIMITER //
+CREATE PROCEDURE procUpdateCandidatoEliminado(
+    IN v_eli_id INT,
+    IN v_nombre VARCHAR(100),
+    IN v_apellido VARCHAR(100),
+    IN v_partido VARCHAR(100),
+    IN v_fecha_nacimiento VARCHAR(100),
+    IN v_propuesta TEXT
+)
+BEGIN
+    UPDATE tbl_candidatos_eliminados
+    SET eli_nombre = v_nombre,
+        eli_apellido = v_apellido,
+        eli_partido = v_partido,
+        eli_fecha_nacimiento = v_fecha_nacimiento,
+        eli_propuesta = v_propuesta
+    WHERE eli_id = v_eli_id;
+END//
+DELIMITER ;
+
+-- Mostrar todos los candidatos eliminados
+DELIMITER //
+CREATE PROCEDURE procSelectCandidatosEliminados()
+BEGIN
+    SELECT eli_id, eli_nombre, eli_apellido, eli_partido, eli_fecha_nacimiento, eli_propuesta, eli_fecha_registro
+    FROM tbl_candidatos_eliminados; 
+END//
+DELIMITER ;
+
+-- Eliminar candidato eliminado
+DELIMITER //
+CREATE PROCEDURE procDeleteCandidatoEliminado(IN v_eli_id INT)
+BEGIN
+    DELETE FROM tbl_candidatos_eliminados WHERE eli_id = v_eli_id;
+END//
+DELIMITER ;
